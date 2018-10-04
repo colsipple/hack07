@@ -1,0 +1,20 @@
+/*
+ *Author(s): Collin Sipple
+ *Date Created: 10/03/2018
+ *Date Modified: 10/03/2018
+ *Purpose: Test the functions in array_utils.h
+ */
+
+#include<stdlib.h>
+#include<stdio.h>
+#include"array_utils.h"
+
+int main(int argc, char **argv) {
+  int numCases = 0;
+  int casePass = 0;
+
+  //Test for function contains()
+  int sampArray[] = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55};
+  int test = contains()
+  return 0;
+}
