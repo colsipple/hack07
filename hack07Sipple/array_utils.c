@@ -1,34 +1,35 @@
 /*
  *Author(s): Collin Sipple, Victor Nguyen, Joe Wyrick
  *Date Created: 10/03/2018
- *Date Modified: 10/04/2018
+ *Date Modified: 10/05/2018
  */
 #include<stdlib.h>
 #include<stdio.h>
 #include"array_utils.h"
 
+//Something in this library is causing segfaults
 int contains(const int *arr, int size, int x) {
   if(arr == NULL) {
-	return 1;
+	return 0;
   }
   
   for(int i = 0; i < size; i++) {
     if(x == arr[i]) {
-      return 0;
+      return 1;
     }
   }
-  return 1;
+  return 0;
 }
 
 int containsWithin(const int *arr, int size, int x, int i, int j) {
   if(arr == NULL) {
-    return 1;	
+    return 0;	
   }
   
   if(i < 0 || i >= size) {
-	return 1;
+	return 0;
   } else if(j < 0 || j >= size) {
-	return 1;
+	return 0;
   }
   
   //Make the indices flexible; one can start before the other without consequence
@@ -44,18 +45,15 @@ int containsWithin(const int *arr, int size, int x, int i, int j) {
   
   for(int index = start; index <= end; index++) {
 	if(x == arr[index]) {
-	  return 0;
+	  return 1;
 	}
   }
-  return 1;
+  return 0;
 }
 
 int * paddedCopy(const int *arr, int oldSize, int newSize) {
   
-  if(arr == NULL) {
-	return NULL;
-  }
-  int newArr[newSize];
+  int *newArr = (int *) malloc(sizeof(int) * newSize);
   int i = 0;
   while(i < oldSize) {
 	newArr[i] = arr[i];
@@ -65,7 +63,6 @@ int * paddedCopy(const int *arr, int oldSize, int newSize) {
 	newArr[i] = 0;
 	i++;
   }
-  
   return newArr;
 }
 
@@ -73,20 +70,20 @@ void reverse(int *arr, int size) {
   int n = 0;
   int *ptArray = paddedCopy(arr, size, size);
   for(int i = (size - 1); i >= 0; i--) {
-	arr[n] = ptArray[i];
+	ptArray[i] = arr[n];
 	n++;
   }
+  arr = ptArray;
   return;
 }
 
 int * reverseCopy(const int *arr, int size) {
-  if(arr == NULL) {
-	return NULL;
-  }
+  
   int n = 0;
-  int *newArr = paddedCopy(arr, size, size);
+  int *newArr = (int *) malloc(sizeof(int) * size);
+  int *arrNaught = paddedCopy(arr, size, size);
   for(int i = (size - 1); i >= 0; i--) {	
-	newArr[n] = arr[i];
+	newArr[n] = arrNaught[i];
 	n++;
   }
   return newArr;

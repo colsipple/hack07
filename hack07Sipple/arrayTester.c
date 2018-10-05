@@ -1,7 +1,7 @@
 /*
  *Author(s): Collin Sipple
  *Date Created: 10/03/2018
- *Date Modified: 10/04/2018
+ *Date Modified: 10/05/2018
  *Purpose: Test the functions in array_utils.h
  */
 
@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
   //Test for a correct value
   int test = contains(sampArray, 10, 8);
   numCases++;
-  if(test == 0) {
+  if(test == 1) {
     printf("Test Case %d passed!\n", numCases);
     casePass++;
   } else {
@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
   //Test for wrong value
   test = contains(sampArray, 10, 12);
   numCases++;
-  if(test == 1) {
+  if(test == 0) {
     printf("Test Case %d passed!\n", numCases);
 	casePass++;
   } else {
@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
   //Test for NULL pointer error
   test = contains(NULL, 10, 8);
   numCases++;
-  if(test == 1) {
+  if(test == 0) {
 	printf("Test Case %d passed!\n", numCases);
 	casePass++;
   } else {
@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
   //Test for Correct Value
   test = containsWithin(sampArray, 10, 13, 5, 9);
   numCases++;
-  if(test == 0) {
+  if(test == 1) {
 	printf("Test Case %d passed!\n", numCases);
 	casePass++;
   } else {
@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
   //Test for Correct Value outside of boundaries
   test = containsWithin(sampArray, 10, 13, 0, 4);
   numCases++;
-  if(test == 1) {
+  if(test == 0) {
 	printf("Test Case %d passed!\n", numCases);
 	casePass++;
   } else {
@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
   //Test for Correct Value with flipped indices
   test = containsWithin(sampArray, 10, 13, 9, 5);
   numCases++;
-  if(test == 0) {
+  if(test == 1) {
 	printf("Test Case %d passed!\n", numCases);
 	casePass++;
   } else {
@@ -139,11 +139,10 @@ int main(int argc, char **argv) {
 	  printf("%d]\n", sampArray[i]);
 	}
   }
-  int trashArray[] = {1, 2, 3, 4};
-  int *tstNewArray = reverseCopy(trashArray, 4);
+  int *tstNewArray = reverseCopy(sampArray, 10);
   printf("Your new array listed: [");
-  for(int i = 0; i < 4; i++) {
-	if(i < 3) {
+  for(int i = 0; i < 10; i++) {
+	if(i < 9) {
       printf("%d, ", tstNewArray[i]);
 	} else {
 	  printf("%d]\n", tstNewArray[i]);
